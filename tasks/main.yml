@@ -1,0 +1,31 @@
+---
+# tasks file for httpdrole
+  - name: "This is httpd"
+    register: x
+    package:
+       name: "{{software}}"
+       state: installed
+    when: ansible_os_family == "RedHat"
+
+  - debug:
+      msg: "{{x}}"
+
+
+  - name: "This is for configuration port"
+    template:
+       dest: "/etc/httpd/conf.d/"
+       src: "{{conf_file}}"
+    when: ansible_os_family == "RedHat"
+    notify: "This is for restart"
+
+  - name: "This is for enabling"
+    service:
+       name: "{{software}}"
+       state: started
+       enabled: yes
+    when: ansible_os_family == "RedHat"
+
+  - name: "This is for testing web"
+    uri:
+       url: "http://13.234.116.62:1234/"
+    register: test

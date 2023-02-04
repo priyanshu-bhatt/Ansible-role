@@ -1,0 +1,6 @@
+- name: "This is for configuration port"
+  template:
+      dest: "/etc/httpd/conf.d/"
+      src: "{{conf_file}}"
+  when: ansible_os_family == "RedHat"
+  notify: "This is for restart"

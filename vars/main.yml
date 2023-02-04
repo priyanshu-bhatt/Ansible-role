@@ -1,0 +1,6 @@
+---
+# vars file for httpdrole
+software: "httpd"
+file: "index.html"
+conf_file: "priyanshu.conf"
+company: "linux world"
